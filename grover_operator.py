@@ -1,36 +1,27 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[21]:
+# In[29]:
 
 
 import time
 import numpy as np
 from scipy.sparse import identity
-import numpy as np
 from scipy import sparse
 from scipy.sparse import lil_matrix
 import scipy.sparse.linalg
-#from qiskit import QuantumCircuit, QuantumRegister
-#from qiskit.quantum_info.operators import Operator
+from qiskit import QuantumCircuit, QuantumRegister
+from qiskit.quantum_info.operators import Operator
 import sys
-#from qiskit import*
-#from qiskit import Aer
-#import qiskit.quantum_info as qi
-#import re
-from scipy.sparse import identity
-from scipy import sparse
-from scipy.sparse import lil_matrix
-import scipy.sparse.linalg
 
 
-# In[45]:
+# In[30]:
 
 
 N = 10
 
 
-# In[44]:
+# In[31]:
 
 
 ## The operator U_x.
@@ -40,7 +31,8 @@ U_x_sp = sparse.csr_matrix(U_x)
 
 ## The operator U_0. This is neeed for the sign adjustment of Grover_reconstructed operator.
 U_0 = - np.identity(2 ** N, dtype=complex) 
-Target_index = int('0000000000', 2)
+Target_state = '0'*N
+Target_index = int(Target_state, 2)
 U_0.itemset((Target_index, Target_index),1)
 
 
@@ -48,7 +40,7 @@ U_0.itemset((Target_index, Target_index),1)
 #G = np.matrix(np.matmul(U_x, U_0)) # U_w = U_x and U_s = U_0.
 
 
-# In[23]:
+# In[32]:
 
 
 '''
@@ -106,7 +98,7 @@ def MCU(c,t,U):
     return np.identity(2**N)-PI_0_matrix+PI_1_matrix
 
 
-# In[24]:
+# In[33]:
 
 
 def Rz_matrix(theta):
@@ -122,7 +114,7 @@ def Phase_matrix(alpha):
     return np.matrix([[np.exp(alpha*1j),0],[0,np.exp(alpha*1j)]])
 
 
-# In[25]:
+# In[34]:
 
 
 def Rz_matrix(theta):
@@ -158,7 +150,7 @@ def Rz(Angle, Qubit,Noise):
         return M
 
 
-# In[26]:
+# In[35]:
 
 
 #N = 3
@@ -211,7 +203,7 @@ def Hadamard(Qubit,Noise):
     return M
 
 
-# In[27]:
+# In[36]:
 
 
 '''
@@ -220,7 +212,6 @@ This function returns a singly controlled unitary gate.
 
 '''
 X = np.matrix([[0,1],[1,0]])
-
 def CU(c,t,Unitary,Noise):
     
     '''
@@ -287,11 +278,10 @@ def CU(c,t,Unitary,Noise):
     return PI_0_matrix+PI_1_matrix
 
 
-# In[28]:
+# In[37]:
 
 
 I = np.identity(2)
-
 def Rx(Noise):
     A = np.cos((np.pi+Noise)/2)
     B = -1j*np.sin((np.pi+Noise)/2)
@@ -300,7 +290,7 @@ def Rx(Noise):
 #Rx(0.0)
 
 
-# In[29]:
+# In[38]:
 
 
 '''
@@ -333,18 +323,14 @@ def Multi_Qubit_Gate(Gate, Qubit):
     return M      
 
 
-# In[30]:
 
 
-N = 10
-
-
-# In[31]:
+# In[40]:
 
 
 l = []
 
-file1 = open('10_gates_list.txt', 'r')
+file1 = open(str(N)+'_gates_list.txt', 'r')
 Lines = file1.readlines()
  
 
@@ -352,7 +338,7 @@ for line in Lines:
     l.append(line.strip())
 
 
-# In[32]:
+# In[41]:
 
 
 gates_list = []
@@ -371,6 +357,72 @@ for i in l:
         gates_list.append(['RZ',float(j[1]),int(j[2])])
 
 
+# ### verifying the gate decomposition
+
+# In[42]:
+
+
+#Or = identity(2**N) 
+
+#cx_count = 0
+#rz_count = 0
+#h_count  = 0
+
+#X = np.matrix([[0,1],[1,0]])
+
+#for gate1 in gates_list:
+
+        
+    #if gate1[0] == 'H':
+        
+        #h_count = h_count + 1
+        #Or = Or * Hadamard(gate1[1],N)
+
+        
+    #elif gate1[0] == 'CX':
+        
+        #cx_count = cx_count + 1
+        #Or = Or * CU(gate1[1], gate1[2], X) 
+
+        
+    #elif gate1[0] == 'RZ':   
+        
+        #rz_count = rz_count + 1
+        #Or = Or*Rz(gate1[1], gate1[2],N)  
+
+    #else: # P, A, B, C
+
+        #Or = Or*Multi_Qubit_Gate(gate1[1],gate1[2])
+
+
+# In[43]:
+
+
+#print("Gate count")
+#print("CX :", cx_count)
+#print("RZ :", rz_count)
+#print("H  :", h_count)
+#print("Others :", len(gates_list)-cx_count-rz_count-h_count)
+
+
+# In[44]:
+
+
+#M = np.around(Or,8).A.real
+#M = M/M[0,0]
+
+
+# In[45]:
+
+
+#sub1 = np.around(MCU([0,1,2,3,4,5,6],7,X)-M,8)
+#np.nonzero(sub1)
+
+
+# # Grover circuit
+
+# In[46]:
+
 
 XH_gates = []
 for i in range(N):
@@ -382,7 +434,13 @@ for i in range(N-1,-1,-1):
     XHR_gates.append(['X',i])
 
 
+# In[47]:
 
+
+#gates_list
+
+
+# In[48]:
 
 
 def Two_Qubit_Decomp(alpha, beta, delta, theta, control, target, Noise):
@@ -439,7 +497,7 @@ def Two_Qubit_Decomp(alpha, beta, delta, theta, control, target, Noise):
 
 
 
-# In[40]:
+# In[57]:
 
 
 '''
@@ -451,12 +509,6 @@ def Rx(Noise):
     A = np.cos((np.pi+Noise)/2)
     B = -1j*np.sin((np.pi+Noise)/2)
     return 1j*np.matrix([[A,B],[B,A]])
-
-
-
-np.random.seed(2022)
-NOISE = 2*(np.random.rand(10**6)-0.5)
-
 
 def Grover_reconstructed(EPSILON):
 
@@ -477,7 +529,7 @@ def Grover_reconstructed(EPSILON):
         
 
         
-            OrH = OrH*Multi_Qubit_Gate( Rx(EPSILON*NOISE[j]) ,i[1])
+            OrH = OrH*Multi_Qubit_Gate(Rx(EPSILON*NOISE[j]),i[1])
             j += 1
             
             
@@ -542,12 +594,21 @@ def Grover_reconstructed(EPSILON):
         
         elif i[0] == 'X':
         
-            OrHR = OrHR*Multi_Qubit_Gate( Rx(EPSILON*NOISE[j]) ,i[1]) 
-
+            OrHR = OrHR*Multi_Qubit_Gate(Rx(EPSILON*NOISE[j]),i[1])
             j += 1
+    return (U_x_sp)*(-OrH*OrX*OrHR)
 
-    return -OrH*OrX*OrHR
 
-np.save('grover_operator',Grover_reconstructed(0.05))
+# The seed is different each time.
+#SEED = int(sys.argv[1])
+#np.random.seed(SEED)
+NOISE = 2*(np.random.rand(10**6)-0.5)
 
+
+# In[58]:
+
+EPSILON = 0.005
+Ok = Grover_reconstructed(EPSILON)
+
+np.save('grover_operator',Ok.A)
 

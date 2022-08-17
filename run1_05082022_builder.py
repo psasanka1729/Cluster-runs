@@ -4,7 +4,7 @@ import subprocess
 import numpy
 import os
 
-partition_info=['normal',4] # = [partition,ncores]
+partition_info=['normal',2] # = [partition,ncores]
 # partition_info=['debug',16] # = [partition,ncores]
 time_str='96:00:00'
 project_name=os.getcwd().split('/')[-3]
@@ -46,8 +46,8 @@ for L in xrange(2): # number of parameters to be sweeped over.
 	fout=open(qsub_file,'w')
 
 	contents=template_contents.replace('###',str(vnum))
-    contents=contents.replace('*project*',project_name)
-	contents=contents.replace('*111*',str(0.0)
+    	contents=contents.replace('*project*',project_name)
+	contents=contents.replace('*111*',str(0.0))
 	out_file_base = 'data_'+str(L)+'_*lll*.out'
 	contents=contents.replace('*ppp*',out_file_base.replace('*lll*','python'))
 	vmap_file.write(str(vnum)+'\t'+str(L)+'\n')

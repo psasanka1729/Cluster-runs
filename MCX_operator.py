@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[21]:
+# In[93]:
 
+'''
+
+This programs returns the MCX operator for N qubits.
+
+'''
 
 import time
 import numpy as np
@@ -11,28 +16,15 @@ import numpy as np
 from scipy import sparse
 from scipy.sparse import lil_matrix
 import scipy.sparse.linalg
-from qiskit import QuantumCircuit, QuantumRegister
-from qiskit.quantum_info.operators import Operator
-import sys
-from qiskit import*
-from qiskit import Aer
-import qiskit.quantum_info as qi
-import numpy as np
-import re
-from scipy.sparse import identity
-import numpy as np
-from scipy import sparse
-from scipy.sparse import lil_matrix
-import scipy.sparse.linalg
 
 
-# In[45]:
+# In[63]:
 
 
-N = 10
+N = 8
 
 
-# In[44]:
+# In[64]:
 
 
 ## The operator U_x.
@@ -42,7 +34,8 @@ U_x_sp = sparse.csr_matrix(U_x)
 
 ## The operator U_0. This is neeed for the sign adjustment of Grover_reconstructed operator.
 U_0 = - np.identity(2 ** N, dtype=complex) 
-Target_index = int('0000000000', 2)
+Target_state = '0'*N
+Target_index = int(Target_state, 2)
 U_0.itemset((Target_index, Target_index),1)
 
 
@@ -50,7 +43,7 @@ U_0.itemset((Target_index, Target_index),1)
 #G = np.matrix(np.matmul(U_x, U_0)) # U_w = U_x and U_s = U_0.
 
 
-# In[23]:
+# In[65]:
 
 
 '''
@@ -108,7 +101,7 @@ def MCU(c,t,U):
     return np.identity(2**N)-PI_0_matrix+PI_1_matrix
 
 
-# In[24]:
+# In[66]:
 
 
 def Rz_matrix(theta):
@@ -124,7 +117,7 @@ def Phase_matrix(alpha):
     return np.matrix([[np.exp(alpha*1j),0],[0,np.exp(alpha*1j)]])
 
 
-# In[25]:
+# In[67]:
 
 
 def Rz_matrix(theta):
@@ -160,7 +153,7 @@ def Rz(Angle, Qubit,Noise):
         return M
 
 
-# In[26]:
+# In[68]:
 
 
 #N = 3
@@ -213,7 +206,7 @@ def Hadamard(Qubit,Noise):
     return M
 
 
-# In[27]:
+# In[69]:
 
 
 '''
@@ -288,7 +281,7 @@ def CU(c,t,Unitary,Noise):
     return PI_0_matrix+PI_1_matrix
 
 
-# In[28]:
+# In[70]:
 
 
 I = np.identity(2)
@@ -300,7 +293,7 @@ def Rx(Noise):
 #Rx(0.0)
 
 
-# In[29]:
+# In[71]:
 
 
 '''
@@ -333,18 +326,18 @@ def Multi_Qubit_Gate(Gate, Qubit):
     return M      
 
 
-# In[30]:
+# In[ ]:
 
 
-N = 10
 
 
-# In[31]:
+
+# In[73]:
 
 
 l = []
 
-file1 = open('10_gates_list.txt', 'r')
+file1 = open(str(N)+'_gates_list.txt', 'r')
 Lines = file1.readlines()
  
 
@@ -352,7 +345,7 @@ for line in Lines:
     l.append(line.strip())
 
 
-# In[32]:
+# In[74]:
 
 
 gates_list = []
@@ -373,7 +366,7 @@ for i in l:
 
 # ### verifying the gate decomposition
 
-# In[33]:
+# In[75]:
 
 
 #Or = identity(2**N) 
@@ -409,7 +402,7 @@ for i in l:
         #Or = Or*Multi_Qubit_Gate(gate1[1],gate1[2])
 
 
-# In[34]:
+# In[76]:
 
 
 #print("Gate count")
@@ -419,14 +412,14 @@ for i in l:
 #print("Others :", len(gates_list)-cx_count-rz_count-h_count)
 
 
-# In[35]:
+# In[77]:
 
 
 #M = np.around(Or,8).A.real
 #M = M/M[0,0]
 
 
-# In[36]:
+# In[78]:
 
 
 #sub1 = np.around(MCU([0,1,2,3,4,5,6],7,X)-M,8)
@@ -435,7 +428,7 @@ for i in l:
 
 # # Grover circuit
 
-# In[37]:
+# In[79]:
 
 
 XH_gates = []
@@ -448,13 +441,13 @@ for i in range(N-1,-1,-1):
     XHR_gates.append(['X',i])
 
 
-# In[38]:
+# In[80]:
 
 
 #gates_list
 
 
-# In[39]:
+# In[81]:
 
 
 def Two_Qubit_Decomp(alpha, beta, delta, theta, control, target, Noise):
@@ -511,7 +504,7 @@ def Two_Qubit_Decomp(alpha, beta, delta, theta, control, target, Noise):
 
 
 
-# In[40]:
+# In[82]:
 
 
 '''
@@ -524,27 +517,12 @@ def Rx(Noise):
     B = -1j*np.sin((np.pi+Noise)/2)
     return 1j*np.matrix([[A,B],[B,A]])
 
-def Grover_reconstructed(EPSILON):
+def MCX_reconstructed(EPSILON):
 
     j = 0
     
     X = np.matrix([[0,1],[1,0]])
-    OrH = identity(2**N)
 
-    for i in XH_gates:
-    
-        if i[0] == 'H':
-        
-           
-            OrH = OrH * Hadamard(i[1],EPSILON*NOISE[j]) # Noise
-            j += 1 
-        
-        elif i[0] == 'X':
-        
-
-        
-            OrH = OrH*Multi_Qubit_Gate(Rx(EPSILON*NOISE[j]),i[1])
-            j += 1
             
             
     '''
@@ -594,38 +572,23 @@ def Grover_reconstructed(EPSILON):
     #M2 = OrX.A
     #M2 = M2/M2[0,0]
     OrX = OrX/OrX[0,0]
-        
-        
-    OrHR = identity(2**N)
-    
-    for i in XHR_gates:
-    
-        if i[0] == 'H':
-        
-           
-            OrHR = OrHR * Hadamard(i[1],EPSILON*NOISE[j]) # Noise
-            j += 1
-        
-        elif i[0] == 'X':
-        
-            OrHR = OrHR*Multi_Qubit_Gate(Rx(EPSILON*NOISE[j],i[1]))
-            j += 1
-    return (U_x_sp)*(-OrH*OrX*OrHR)
+
+    return -OrX
 
 
-# In[41]:
+# In[ ]:
 
 
-#Ok = Grover_reconstructed(0.0)
 
 
-# In[1]:
+
+# In[83]:
 
 
 #Phi_F(Ok.A)
 
 
-# In[12]:
+# In[84]:
 
 
 import numpy
@@ -713,309 +676,29 @@ def eigu(U,tol=1e-9):
     return (U_1[inds],V_1[:,inds]) # = (U_d,V) s.t. U=V*U_d*V^\dagger
 
 
-# In[16]:
-
-
-def Phi_F(operator): 
-    
-    return (1j*np.log(eigu(operator)[0])).real  # eigu(Gr)[0] = exp(-i * phi_F)
-
-
 # # Entropy
 
-# In[276]:
-
-
-L = N // 2 # Length of half cut number of qubits.
-
-
-
-'''
-    The following function takes a wavefunction as input and returns its entropy.
-
-'''
-
-def Entropy(Wavefunction):
-
-
-
-
-    # Converting the list to a numpy matrix.
-    Psi = np.matrix(Wavefunction).reshape(len(Wavefunction),1) # Psi column matrix.
-
-    # Normalizing Psi.
-    Psi = Psi/np.linalg.norm(Psi)
-
-
-      
-    
-    def psi(s):
-        return Psi[(2**L)*s:(2**L)*s + 2**L]   
-    
-      
-    '''
-        psi(s_p) is a row matrix/vector. psi(s) is a column matrix/vector.      
-        Dimension of rhoA is N/2 x N/2. 
-        The element <s|rhoA|sp> is given by psi_sp^\dagger * psi_s.
-        
-    ''' 
-
-    def rhoA(s,s_p): # <s|rho_A|s_p>
-
-        # psi(s_p)^\dagger * psi(s) is the element of (s,s_p) of rho_AB.  
-        return psi(s_p).getH() * psi(s)
-    
-    
-    
-    def rhoA_Matrix(N):
-        
-        L = N // 2 # Length of half cut number of qubits.
-        M = np.zeros((L,L), dtype = complex) # 0 to N-1.
-    
-        '''
-            rho is Hermitian, it is sufficient to calculate the elements above the diagonal.
-            The the elements below the diagonal can be replace by the complex cpnjugate of the
-            elements above the diagonal.
-        '''
-        for i in range(L):
-            for j in range(L):
-            
-                if i <= j : # Above the diagonal (i,j) i<j.
-                
-                    M[i,j] = rhoA(i,j)[0,0]
-                
-                else: # Below the diagonal (i,j) i>j.
-                
-                    M[i,j] = np.conjugate(M[j,i])
-        return M    
-    
-    
-    '''
-        w is the diagonal of the diagonalized matrix rhoA.
-
-    '''
-    
-    w, v = np.linalg.eig(rhoA_Matrix(N))
-    
-    w = w.real
-
-    '''
-        The following loop calculates S = - sum \lamba_i * log(\lambda_i).
-
-    '''
-    
-    DL = np.zeros(L) # Creating an array for log w with zeros.
-    
-    for i in range(len(w)):
-    
-        if abs(w[i]) < 1.e-8: # log of zero gives nan.
-        
-            pass # Leave the log(zero) element as zero.
-    
-        else:
-        
-            DL[i] = np.log(w[i])
-        
-    # Entropy = -Tr(rho * log(rho)).        
-    return -sum(w*DL)
-
-
-
-
-def Bin2Dec(BinaryNumber): # Converts binary to decimal numbers.
-    return int(str(BinaryNumber),2)
-
-
-def Dec2Bin(DecimalNumber): # Converts decimal to binary numbers.
-    return bin(DecimalNumber).replace("0b", "")
-
-
-
-List = [i for i in range(2**N)] 
-
-
-'''
-The following function converts all numbers in decimals in the above list 
- from 0 to 2^N -1 to binary.
-
-''' 
-def List_Bin(List):
-    
-    l = []
-    
-    for i in List:
-        
-        i_Bin = Dec2Bin(i)
-              
-        
-        '''
-        While converting numbers from decimal to binary, for example, 1
-         is mapped to 1, to make sure that
-        every numbers have N qubits in them, the following loop adds leading 
-        zeros to make the
-        length of the binary string equal to N. Now, 1 is mapped to 000.....1
-         (string of length N).
-        
-        '''
-        
-        while len(i_Bin) < N: 
-            
-            i_Bin = '0'+i_Bin # This loop adds leading zeros.
-            
-        l.append(i_Bin)
-        
-    return l
-
-
-
-
-
-'''
-    The following function takes a binary string as input and rolls the qubits by one and
-    returns the rolled string.
-
-'''
-
-def Roll_String(Binary_String):
-    
-    return Binary_String[-1] + Binary_String[:-1]
-
-
-
-
-
-
-
-'''
-    The following function takes a wavefunction as input and performs one roll
-     on the qubits and
-    returns the resultant wavefunction.
-
-'''
-
-def Psi_Roll(Inital_Psi):
-    
-    
-    
-    '''
-        The following list contains all possible 2^N qubits after one roll 
-        is performed on them.
-        For example, the first position 0001 is changed to 1000.
-    
-    '''
-    
-    # Rolls every string in the list List by one qubit.
-    Rl = [Roll_String(i) for i in List_Bin(List)] 
-
-   
-
-    
-    ''' 
-        The following list contains the previous list but in decimal numbers. For example,
-        for N =4, the first position 1 is changed to 8.
-        
-    
-    '''
-    
-    Rl_d = [Bin2Dec(i) for i in Rl] # Converts the rolled binary string to decimal number.
-
-
-    '''
-        The following loop rearranges the coefficients of Psi after rolling. 
-        For example, for N = 4,
-        if the first coefficient 0001 is mapped to the eighth coefficient 1000 after
-         one rotation of
-        the qubits. The coefficient of the rolled Psi in the i ^ th position is in the
-         Rl_d[i] ^ th positon
-        of the initial Psi.
-    
-    '''
-    
-    
-    Psi_Rolled = []
-
-    for i in range(2**N): 
-        # Rearranging the coefficients according to the list l_d.
-        Psi_Rolled.append(Inital_Psi[Rl_d[i]]) 
-        
-    return Psi_Rolled
-
-
-'''
-    The following function performs specified number of rolls Num on the qubits.
-
-'''
-
-def N_Rolled(Num, Initial_Psi): # Use loop only for postive N.
-    
-    if Num == 0:
-        
-        return Initial_Psi
-    
-    else:
-    
-        s = Psi_Roll(Initial_Psi) # One roll.
-    
-        for i in range(Num-1): # Loop performing remaining N-1 rolls.
-        
-            s = Psi_Roll(s)
-        
-        return np.matrix(s).reshape(2**N,1) # Returning the rolled wavefunction as a matrix.
-
-def Average_Entropy(Initial_Psi):
-    
-    list_of_entropies = []
-    
-    '''
-    The loop calculates all the entropies and returns a list containing them.
-    
-    '''
-    for i in range(N):
-        
-        S = Entropy(N_Rolled(i, Initial_Psi))
-        list_of_entropies.append(S)
-        
-    # Returns the average entropy    
-    return sum(list_of_entropies) / len(list_of_entropies)
-
-
-def V_Matrix(operator):
-    return eigu(operator)[1]
-    
-def Array2List(Arr):
-    Arr_l = Arr.tolist()
-    l = []
-    for i in Arr_l:
-        l.append(i[0])
-    return l
-
-
-# In[43]:
+# In[85]:
 
 
 np.random.seed(2022)
 NOISE = 2*(np.random.rand(10**6)-0.5)
 
 
-# In[42]:
+# In[86]:
 
 
-#start = time.time()
-f = open('plot_data_10'+'.txt', 'w')
-Num = 100
+Ok = MCX_reconstructed(0.0)
 
-for i in range(1,Num):
-    eps = 0.2*(i/(Num))
-    #print(i)
-    
-    f = open('plot_data_10'+'.txt', 'a')
-    Op = Grover_reconstructed(eps).A
-    X = str(eps)
-    Y = Phi_F(Op)
-    V = eigu(Op)[1]
-            
-    # file -> epsilon phi_f entropy    
-    for j in range(2**N):
-        f.write(X +'\t'+ str(Y[j].real)+ '\t' + str(Average_Entropy(Array2List(V[:,j:j+1]))) +'\n')   
-#print(time.time()-start)
+
+# In[88]:
+
+
+M = np.around(Ok,8).A.real
+M = M/M[0,0]
+
+
+np.save('MCX_operator',M)
+
+
 
