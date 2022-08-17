@@ -17,7 +17,7 @@ import numpy as np
 from scipy import sparse
 from scipy.sparse import lil_matrix
 import scipy.sparse.linalg
-
+import sys
 
 # In[63]:
 
@@ -550,7 +550,7 @@ def U0_reconstructed(EPSILON):
 # In[86]:
 # U0 has -1 along the diagonal except the target state which is 1.
 
-EPSILON = 0.0
+EPSILON = float(sys.argv[1])
 M = U0_reconstructed(EPSILON)
 print(Noise_count)
 
