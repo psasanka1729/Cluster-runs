@@ -1,0 +1,65 @@
+commit b7ac0b7d6d9294c5f3a5462a3286a5ddd61b675f
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 15:46:02 2022 -0500
+
+    Commit before run run5_18082022
+
+commit 5ebeadb79cfc139cafc8e2ce73f7c0b59412252e
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 15:25:39 2022 -0500
+
+    Commit before run run4_18082022
+
+commit 75975807320e58adef997ec529646d92c3813096
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 15:24:23 2022 -0500
+
+    Commit before run run4_18082022
+
+commit b606b57bd9113b52ec1414f2b18a5ddd95948d9e
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 15:08:02 2022 -0500
+
+    energy vs noise
+
+commit b6b3f622b7b3ba28a7314846126572a3fbc4f0f7
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Thu Aug 18 14:24:32 2022 -0500
+
+    energy noise for N=10
+
+commit 704e98b1e05793b39bde3b6036e769d1be20dfb4
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 13:00:25 2022 -0500
+
+    energy vs entropy
+
+commit 764a615603d4f2988d787ccf307868f5838269ec
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Thu Aug 18 12:35:56 2022 -0500
+
+    entropy vs energy
+
+commit c69d627007380de0ee87e2dfa31f29d5bba5322a
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Wed Aug 17 17:35:44 2022 -0500
+
+    create_U0 modified
+
+commit 98270dc46a0e91aa88183a0d2706f32a11b2b067
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Wed Aug 17 17:31:13 2022 -0500
+
+    create_U0
+
+commit 97e34cf2de00fba96f9dbbad518017a280ea0832
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Wed Aug 17 14:52:23 2022 -0500
+
+    creates U0 from MCX for N=10
+
+commit b4c599dd25f104d3ad42cf65f580080fe4b36f4c
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Sun Aug 14 11:22:41 2022 -0500
+
+    This is the first commit
