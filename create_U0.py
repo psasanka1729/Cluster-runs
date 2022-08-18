@@ -25,8 +25,10 @@ import sys
 N = 10
 
 Noise_count = 0
-np.random.seed(2022)
+SEED = int(sys.argv[1])
+np.random.seed(SEED)
 NOISE = 2*(np.random.rand(10**6)-0.5)
+
 # In[64]:
 
 
@@ -550,13 +552,13 @@ def U0_reconstructed(EPSILON):
 # In[86]:
 # U0 has -1 along the diagonal except the target state which is 1.
 
-EPSILON = float(sys.argv[1])
+EPSILON = 0.25
 M = U0_reconstructed(EPSILON)
 print(Noise_count)
 
 M = M/M[0,0]
 
-
+ 
 np.save(str(EPSILON)+'_U0_operator',M.A)
 
 
