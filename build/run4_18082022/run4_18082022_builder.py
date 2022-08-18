@@ -4,7 +4,7 @@ import subprocess
 import numpy
 import os
 
-partition_info=['CMT',16] # = [partition,ncores]
+partition_info=['normal',16] # = [partition,ncores]
 # partition_info=['debug',16] # = [partition,ncores]
 time_str='24:00:00'
 project_name=os.getcwd().split('/')[-3]
@@ -47,7 +47,7 @@ for L in xrange(32):
 
 	contents=template_contents.replace('###',str(vnum))
         contents=contents.replace('*project*',project_name)
-	contents=contents.replace('*111*',str(0.0012170226130653267*(L-32)+0.038944723618090454))
+	contents=contents.replace('*111*',str(0.0012170226130653267*L))
 	out_file_base = 'data_'+str(L)+'_*lll*.out'
 	contents=contents.replace('*ppp*',out_file_base.replace('*lll*','python'))
 	vmap_file.write(str(vnum)+'\t'+str(L)+'\n')
