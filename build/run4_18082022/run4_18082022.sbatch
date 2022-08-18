@@ -3,7 +3,7 @@
 #SBATCH --job-name=run4_18082022
 #
 # Partition:
-#SBATCH --partition=CMT
+#SBATCH --partition=normal
 #
 # Processors:
 #SBATCH --ntasks=32
