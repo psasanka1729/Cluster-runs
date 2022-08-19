@@ -47,7 +47,7 @@ for L in xrange(0,32):
 
 	contents=template_contents.replace('###',str(vnum))
         contents=contents.replace('*project*',project_name)
-	contents=contents.replace('*111*',str(0.03109718*L))
+	contents=contents.replace('*111*',str(0.000971786875*L))
 	out_file_base = 'data_'+str(L)+'_*lll*.out'
 	contents=contents.replace('*ppp*',out_file_base.replace('*lll*','python'))
 	vmap_file.write(str(vnum)+'\t'+str(L)+'\n')
