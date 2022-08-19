@@ -1,3 +1,33 @@
+commit 0352f1459f98105b176b07c442a2ff54f2bb70e1
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Aug 19 11:16:45 2022 -0500
+
+    Commit before run run5_18082022
+
+commit 6835d73c96bc0dd4809e32fa823847630c748546
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Thu Aug 18 23:22:06 2022 -0500
+
+    creates MCX gate for given N
+
+commit 989d90c53d07a92ce7e68fd18a49a8b04d087a1f
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Thu Aug 18 23:07:14 2022 -0500
+
+    creates gate list for given N
+
+commit 1792b96d5b1d3b158aeba8648ea3c1def574c3b2
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 22:53:28 2022 -0500
+
+    nightly backup
+
+commit 3112a42ad7671e286d1d9afe215a5050aa012924
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Aug 18 15:51:37 2022 -0500
+
+    energy noise 2 runs
+
 commit b7ac0b7d6d9294c5f3a5462a3286a5ddd61b675f
 Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
 Date:   Thu Aug 18 15:46:02 2022 -0500
