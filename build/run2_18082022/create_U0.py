@@ -552,7 +552,7 @@ def U0_reconstructed(EPSILON):
 # In[86]:
 # U0 has -1 along the diagonal except the target state which is 1.
 
-EPSILON = 0.025
+EPSILON = 0.04
 M = U0_reconstructed(EPSILON)
 print(Noise_count)
 

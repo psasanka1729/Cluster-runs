@@ -962,7 +962,7 @@ M = U0_reconstructed(EPSILON)
 M = M/M[0,0]
 
 # Grover operator reconstructed with noise.
-Op = np.matmul(U_x, M)
+Op = np.matmul(U_x, M.A)
 
 
 f = open(str(EPSILON)+'plot_data.txt', 'w')    
