@@ -1,0 +1,16 @@
+bash run1_20082022_0.qsub
+bash run1_20082022_1.qsub
+bash run1_20082022_2.qsub
+bash run1_20082022_3.qsub
+bash run1_20082022_4.qsub
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
