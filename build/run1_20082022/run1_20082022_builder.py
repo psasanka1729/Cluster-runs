@@ -41,7 +41,7 @@ template_contents=open(template_file,'r').read()
 
 vnum=0
 
-eps_list = [0.11,0.12,0.14,0.16,0.19]
+eps_list = [0.011,0.012,0.014,0.016,0.019]
 for L in xrange(5):
 	qsub_file=template_file.replace('.template','_'+str(vnum)+'.qsub')
 	fout=open(qsub_file,'w')
