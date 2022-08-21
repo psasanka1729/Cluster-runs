@@ -36,15 +36,7 @@ Noise_count = 0
 A = np.ones((2**N, 2**N))
 U_x = (2/(2**N))*A - np.identity(2**N, dtype = complex)
 
-## The operator U_0. This is neeed for the sign adjustment of Grover_reconstructed operator.
-U_0 = - np.identity(2 ** N, dtype=complex) 
-Target_state = '0'*N
-Target_index = int(Target_state, 2)
-U_0.itemset((Target_index, Target_index),1)
 
-
-## G is the Grover operator.
-#G = np.matrix(np.matmul(U_x, U_0)) # U_w = U_x and U_s = U_0.
 
 
 # In[65]:
@@ -946,7 +938,7 @@ def Array2List(Arr):
 # In[15]:
 
 
-np.random.seed(2022)
+np.random.seed(1729)
 NOISE= 2*(np.random.rand(10**6)-0.5)
 
 
@@ -969,9 +961,14 @@ f = open(str(EPSILON)+'plot_data.txt', 'w')
 f = open(str(EPSILON)+'plot_data.txt', 'a')
 
 
+
+def Phi_F(operator): 
+    
+    return (1j*np.log(eigu(operator)[0])).real 
 X = str(EPSILON)
-Y = Phi_F(Op)
-V = eigu(Op)[1]
+EIGU = eigu(Op)
+Y = (1j*np.log(EIGU[0])).real
+V = EIGU[1]
             
     # file -> epsilon phi_f entropy    
 for j in range(2**N):
