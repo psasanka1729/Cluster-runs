@@ -36,15 +36,7 @@ Noise_count = 0
 A = np.ones((2**N, 2**N))
 U_x = (2/(2**N))*A - np.identity(2**N, dtype = complex)
 
-## The operator U_0. This is neeed for the sign adjustment of Grover_reconstructed operator.
-U_0 = - np.identity(2 ** N, dtype=complex) 
-Target_state = '0'*N
-Target_index = int(Target_state, 2)
-U_0.itemset((Target_index, Target_index),1)
 
-
-## G is the Grover operator.
-#G = np.matrix(np.matmul(U_x, U_0)) # U_w = U_x and U_s = U_0.
 
 
 # In[65]:

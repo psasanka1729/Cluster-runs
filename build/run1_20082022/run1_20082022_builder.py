@@ -41,13 +41,14 @@ template_contents=open(template_file,'r').read()
 
 vnum=0
 
+eps_list = [0.11,0.12,0.14,0.16,0.19]
 for L in xrange(5):
 	qsub_file=template_file.replace('.template','_'+str(vnum)+'.qsub')
 	fout=open(qsub_file,'w')
 
 	contents=template_contents.replace('###',str(vnum))
         contents=contents.replace('*project*',project_name)
-	contents=contents.replace('*111*',str(L/100.0))
+	contents=contents.replace('*111*',str(eps_list[L]))
 	out_file_base = 'data_'+str(L)+'_*lll*.out'
 	contents=contents.replace('*ppp*',out_file_base.replace('*lll*','python'))
 	vmap_file.write(str(vnum)+'\t'+str(L)+'\n')
