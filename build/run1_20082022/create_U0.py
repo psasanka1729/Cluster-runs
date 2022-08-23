@@ -25,7 +25,7 @@ import sys
 N = 10
 
 Noise_count = 0
-SEED = 1729
+SEED = 1234
 np.random.seed(SEED)
 NOISE = 2*(np.random.rand(10**6)-0.5)
 
