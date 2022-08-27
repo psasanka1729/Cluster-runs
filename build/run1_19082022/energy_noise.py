@@ -25,9 +25,10 @@ import sys
 N = 10
 
 Noise_count = 0
-#SEED = int(sys.argv[1])
-#np.random.seed(SEED)
-#NOISE = 2*(np.random.rand(10**6)-0.5)
+
+SEED = 3000
+np.random.seed(SEED)
+NOISE = 2*(np.random.rand(10**6)-0.5)
 
 # In[64]:
 
@@ -35,8 +36,17 @@ Noise_count = 0
 ## The operator U_x.
 A = np.ones((2**N, 2**N))
 U_x = (2/(2**N))*A - np.identity(2**N, dtype = complex)
+U_x_sp = sparse.csr_matrix(U_x)
+
+## The operator U_0. This is neeed for the sign adjustment of Grover_reconstructed operator.
+U_0 = - np.identity(2 ** N, dtype=complex) 
+Target_state = '0'*N
+Target_index = int(Target_state, 2)
+U_0.itemset((Target_index, Target_index),1)
 
 
+## G is the Grover operator.
+#G = np.matrix(np.matmul(U_x, U_0)) # U_w = U_x and U_s = U_0.
 
 
 # In[65]:
@@ -543,12 +553,14 @@ def U0_reconstructed(EPSILON):
 # In[86]:
 # U0 has -1 along the diagonal except the target state which is 1.
 
+EPSILON = float(sys.argv[1])
+M = U0_reconstructed(EPSILON)
+#print(Noise_count)
 
+M = M/M[0,0]
 
- 
+G = np.matmul(U_x,M.A)
 #np.save(str(EPSILON)+'_U0_operator',M.A)
-
-
 
 
 
@@ -938,8 +950,6 @@ def Array2List(Arr):
 # In[15]:
 
 
-np.random.seed(2022)
-NOISE= 2*(np.random.rand(10**6)-0.5)
 
 
 # In[ ]:
@@ -948,22 +958,18 @@ NOISE= 2*(np.random.rand(10**6)-0.5)
 
 
 
-EPSILON = float(sys.argv[1])
-M = U0_reconstructed(EPSILON)
-
-M = M/M[0,0]
-
-# Grover operator reconstructed with noise.
-Op = np.matmul(U_x, M.A)
 
 
-f = open(str(EPSILON)+'plot_data.txt', 'w')    
-f = open(str(EPSILON)+'plot_data.txt', 'a')
 
+f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'w')    
+f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'a')
+
+
+EIGU = eigu(G)
 
 X = str(EPSILON)
-Y = Phi_F(Op)
-V = eigu(Op)[1]
+Y = (1j*np.log(EIGU[0])).real
+V = EIGU[1]
             
     # file -> epsilon phi_f entropy    
 for j in range(2**N):

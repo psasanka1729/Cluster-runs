@@ -937,8 +937,8 @@ def Array2List(Arr):
 
 # In[15]:
 
-
-np.random.seed(1729)
+SEED = 1000
+np.random.seed(SEED)
 NOISE= 2*(np.random.rand(10**6)-0.5)
 
 
@@ -958,14 +958,15 @@ M = M/M[0,0]
 Op = np.matmul(U_x, M.A)
 
 
-f = open(str(EPSILON)+'plot_data.txt', 'w')    
-f = open(str(EPSILON)+'plot_data.txt', 'a')
+f = open(str(SEED)+'_'+str(N)+'_'+str(EPSILON)+'plot_data.txt', 'w')    
+f = open(str(SEED)+'_'+str(N)+'_'+str(EPSILON)+'plot_data.txt', 'a')
 
 
 
 def Phi_F(operator): 
     
-    return (1j*np.log(eigu(operator)[0])).real 
+    return (1j*np.log(eigu(operator)[0])).real
+
 X = str(EPSILON)
 EIGU = eigu(Op)
 Y = (1j*np.log(EIGU[0])).real
