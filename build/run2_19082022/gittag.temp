@@ -1,3 +1,75 @@
+commit 2309a71cd7e7e75e49780182a9ba793526caeacd
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Aug 26 23:06:07 2022 -0500
+
+    Commit before run run2_19082022
+
+commit c589c6db6aaa4c13b581d9ef62e21336254df668
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Aug 26 22:58:25 2022 -0500
+
+    Commit before run run5_18082022
+
+commit 93477c4a049d74cc817b6f6487ea62013923a5ca
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Aug 26 22:53:30 2022 -0500
+
+    Commit before run run1_19082022
+
+commit a14634cc7c956e7d3dff7ff6a06bbf86b8ab5dc8
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Aug 26 22:53:07 2022 -0500
+
+    Commit before run run1_19082022
+
+commit 9607f621a4fc087dd8dcdbb81c191b4934441f92
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Fri Aug 26 11:01:39 2022 -0500
+
+    energy-noise working
+
+commit 8c57451750a592572155b026294b4dde263c4841
+Author: Sasanka Dowarah <dowarahsasanka@gmail.com>
+Date:   Tue Aug 23 23:42:55 2022 -0500
+
+    energy-noise working for L=8
+
+commit 86ca771598b98b4bbbcb1f9231086bae4911eb3a
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Tue Aug 23 16:12:12 2022 -0500
+
+    energy noise needs change
+
+commit 982050dc94dd5dac9ab94d8b248e2c5bcb70c737
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sun Aug 21 14:58:26 2022 -0500
+
+    entropy calculation is made faster
+
+commit cf0a1996519d2440781debc452f69778bbf7c7d1
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sun Aug 21 11:59:23 2022 -0500
+
+    Commit before run run1_20082022
+
+commit 04a3195997b436de1e6256d234ad8814a60253f4
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sun Aug 21 11:58:18 2022 -0500
+
+    Commit before run run1_20082022
+
+commit b79e14a894e3acccebf4f8f40cd90640fe38843c
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sat Aug 20 22:16:19 2022 -0500
+
+    Commit before run run1_19082022
+
+commit 349820d7152f992518810ae0edbfbb56c2174ae5
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sat Aug 20 14:53:58 2022 -0500
+
+    probability vs time
+
 commit 5c2292b2ccb3f21e94b962cf7450243d88fb9824
 Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
 Date:   Sat Aug 20 12:41:50 2022 -0500

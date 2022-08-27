@@ -41,13 +41,13 @@ template_contents=open(template_file,'r').read()
 
 vnum=0
 
-for L in range(0,32):
+for L in range(32*2,32*3):
 	qsub_file=template_file.replace('.template','_'+str(vnum)+'.qsub')
 	fout=open(qsub_file,'w')
 
 	contents=template_contents.replace('###',str(vnum))
 	contents=contents.replace('*project*',project_name)
-	contents=contents.replace('*111*',str(0.0004868090625*L))
+	contents=contents.replace('*111*',str(0.0004868090625*L+0.001005502))
 	out_file_base = 'data_'+str(L)+'_*lll*.out'
 	contents=contents.replace('*ppp*',out_file_base.replace('*lll*','python'))
 	vmap_file.write(str(vnum)+'\t'+str(L)+'\n')

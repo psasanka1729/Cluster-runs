@@ -22,7 +22,7 @@ import sys
 # In[63]:
 
 
-N = 8
+N = 10
 
 Noise_count = 0
 
