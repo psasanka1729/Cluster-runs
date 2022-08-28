@@ -972,7 +972,8 @@ f = open(str(SEED)+'_'+str(N)+'_plot_data.txt', 'w')
 #V = EIGU[1]
             
     # file -> epsilon phi_f entropy  
-for i in range(1,300):    
+Num = 300    
+for i in range(1,Num):    
 	EPSILON = 0.2*(i/Num)
 	M = U0_reconstructed(EPSILON)
 	M = M/M[0,0]

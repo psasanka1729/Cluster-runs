@@ -22,11 +22,11 @@ import sys
 # In[63]:
 
 
-N = 10
+N = 8
 
 Noise_count = 0
 
-SEED = 3000
+SEED = 8000
 np.random.seed(SEED)
 NOISE = 2*(np.random.rand(10**6)-0.5)
 
