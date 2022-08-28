@@ -937,7 +937,7 @@ def Array2List(Arr):
 
 # In[15]:
 
-SEED = 1000
+SEED = 3000
 np.random.seed(SEED)
 NOISE= 2*(np.random.rand(10**6)-0.5)
 
