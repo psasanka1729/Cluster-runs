@@ -20,7 +20,7 @@ then
 fi
 cd $SCRATCH_DIR/
 
-{ time python ./$EXEC 0.0696765096875; } > temp.out 2> error.err
+{ time python ./$EXEC 0.0852543996875; } > temp.out 2> error.err
 
 if [ "$(pwd)" == $SCRATCH_DIR ]; then
     echo "Removing files"
