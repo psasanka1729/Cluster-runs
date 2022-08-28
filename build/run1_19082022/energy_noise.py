@@ -961,7 +961,7 @@ def Array2List(Arr):
 
 
 
-f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'w')    
+f = open(str(SEED)+'_'+str(N)+'_plot_data.txt', 'w')    
 #f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'a')
 
 
@@ -982,7 +982,7 @@ for i in range(1,300):
 	X = str(EPSILON)
 	Y = (1j*np.log(EIGU[0])).real
 	V = EIGU[1]
-	f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'a')
+	f = open(str(SEED)+'_'+str(N)+'_plot_data.txt', 'a')
 
 	for j in range(2**N):
     		f.write(X +'\t'+ str(Y[j].real)+ '\t' + 
