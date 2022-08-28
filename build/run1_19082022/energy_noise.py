@@ -22,11 +22,11 @@ import sys
 # In[63]:
 
 
-N = 10
+N = 8
 
 Noise_count = 0
 
-SEED = 3000
+SEED = int(sys.argv[1])
 np.random.seed(SEED)
 NOISE = 2*(np.random.rand(10**6)-0.5)
 
@@ -553,13 +553,13 @@ def U0_reconstructed(EPSILON):
 # In[86]:
 # U0 has -1 along the diagonal except the target state which is 1.
 
-EPSILON = float(sys.argv[1])
-M = U0_reconstructed(EPSILON)
+#EPSILON = float(sys.argv[1])
+#M = U0_reconstructed(EPSILON)
 #print(Noise_count)
 
-M = M/M[0,0]
+#M = M/M[0,0]
 
-G = np.matmul(U_x,M.A)
+#G = np.matmul(U_x,M.A)
 #np.save(str(EPSILON)+'_U0_operator',M.A)
 
 
@@ -962,17 +962,29 @@ def Array2List(Arr):
 
 
 f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'w')    
-f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'a')
+#f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'a')
 
 
-EIGU = eigu(G)
+#EIGU = eigu(G)
 
-X = str(EPSILON)
-Y = (1j*np.log(EIGU[0])).real
-V = EIGU[1]
+#X = str(EPSILON)
+#Y = (1j*np.log(EIGU[0])).real
+#V = EIGU[1]
             
-    # file -> epsilon phi_f entropy    
-for j in range(2**N):
-    f.write(X +'\t'+ str(Y[j].real)+ '\t' + 
-        str(Average_Entropy(Array2List(V[:,j:j+1]))) +'\n')   
+    # file -> epsilon phi_f entropy  
+for i in range(1,300):    
+	EPSILON = 0.2*(i/Num)
+	M = U0_reconstructed(EPSILON)
+	M = M/M[0,0]
+
+	G = np.matmul(U_x,M.A)
+	EIGU = eigu(G)
+	X = str(EPSILON)
+	Y = (1j*np.log(EIGU[0])).real
+	V = EIGU[1]
+	f = open(str(SEED)+'_'+str(EPSILON)+'_plot_data.txt', 'a')
+
+	for j in range(2**N):
+    		f.write(X +'\t'+ str(Y[j].real)+ '\t' + 
+        	str(Average_Entropy(Array2List(V[:,j:j+1]))) +'\n')   
 
